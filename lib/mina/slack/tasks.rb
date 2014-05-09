@@ -17,7 +17,7 @@ namespace :slack do
 
   task :starting do
     if slack_token and slack_room and slack_subdomain
-      announced_stage = ENV['to'] || 'production'
+      announced_stage = environment || 'production'
       announcement = "#{deployer} is deploying #{app}'s #{branch} branch to #{announced_stage}"
 
       # Parse the API url and create an SSL connection
@@ -38,10 +38,10 @@ namespace :slack do
   end
 
 
-  
+
   task :finished do
     if slack_token and slack_room and slack_subdomain
-      announced_stage = ENV['to'] || 'production'
+      announced_stage = environment || 'production'
       announcement = "#{deployer} successfully deployed #{app}'s #{branch} branch to #{announced_stage}!"
 
       # Parse the URI and handle the https connection
