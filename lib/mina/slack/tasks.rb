@@ -15,7 +15,7 @@ def message(options)
     "#{options[:commit_hash]}|#{options[:branch]}@#{short_hash}>"
 
   "#{options[:deployer]} #{options[:verb]} #{options[:app]}'s"+
-    " #{commit_link} to #{options[:environment]}"
+    " #{commit_link} (#{options[:commit_message]}) to #{options[:environment]}"
 end
 
 # Slack tasks
@@ -30,7 +30,8 @@ namespace :slack do
         app: app,
         deployer: deployer,
         environment: environment,
-        branch: branch
+        branch: branch,
+        commit_message: commit_message
       )
 
       # Parse the API url and create an SSL connection
@@ -61,7 +62,8 @@ namespace :slack do
         app: app,
         deployer: deployer,
         environment: environment,
-        branch: branch
+        branch: branch,
+        commit_message: commit_message
       )
 
       # Parse the URI and handle the https connection
